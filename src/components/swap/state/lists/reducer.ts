@@ -30,7 +30,7 @@ const initialState: ListsState = {
       pendingUpdate: null
     }
   },
-  selectedListUrl: undefined
+  selectedListUrl: localStorage.getItem('mySelectedUrl') 
 }
 
 export default createReducer(initialState, builder =>
@@ -86,6 +86,7 @@ export default createReducer(initialState, builder =>
       }
     })
     .addCase(selectList, (state, { payload: url }) => {
+      localStorage.setItem('mySelectedUrl', url);
       state.selectedListUrl = url
       // automatically adds list
       if (!state.byUrl[url]) {
